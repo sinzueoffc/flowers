@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Octavia</title>
+    <link rel="stylesheet" href="https://rerofya.github.io/resources/flower.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #000; overflow: hidden; height: 100vh; width: 100vw; color: white; font-family: 'Georgia', serif; display: flex; justify-content: center; align-items: center; }
+
+        #welcome-screen {
+            position: fixed;
+            z-index: 1000;
+            text-align: center;
+            transition: opacity 1s;
+        }
+
+        h1 { font-size: 1.5rem; margin-bottom: 10px; color: #ffb7c5; }
+
+        button {
+            padding: 12px 30px;
+            background: rgba(255, 183, 197, 0.2);
+            border: 2px solid #ffb7c5;
+            border-radius: 25px;
+            color: #ffb7c5;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+        #text-overlay {
+            position: fixed;
+            top: 15%;
+            width: 100%;
+            z-index: 100;
+            text-align: center;
+            padding: 0 20px;
+            display: none;
+        }
+
+        #typing-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        #flower-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+            display: none;
+            justify-content: center;
+            align-items: flex-end;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="mySong">
+        <source src="bunga.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="welcome-screen">
+        <h1>Helloo Okta...</h1>
+        <p>Ada bunga abadi buat kamu 🌸</p>
+        <button onclick="startEverything()">Klik di sini ya</button>
+    </div>
+
+    <div id="text-overlay">
+        <p id="typing-text"></p>
+    </div>
+
+    <div id="flower-container"></div>
+
+    <script src="https://rerofya.github.io/resources/flower.js"></script>
+
+    <script>
+        const texts = [
+            "alloww alloww pacarr akuu",
+            "yang paling cantii , lucu, imut , gemes seduniaa",
+            "aku cuma mau bilangg",
+            "jangan pernah bosen sama aku ya",
+            "kita harus sama sama terus",
+            "sampai rambut diantara kita perlahan memutih",
+            "ingat janjiku ya sayang",
+            "aku bakal pertahanin hubungan ini sampai ke jenjang pelaminan",
+            "tapi sebelum sampai ke masa itu",
+            "kita harus melewati masa-masa sulit dulu ya",
+            "mungkin emang susah, bakal ada rintangan kedepannya",
+            "tapi aku yakin kita bisa lewati berbagai macam ujiannya",
+            "semoga kamu inget aku terus dalam kondisi apapun ya sayang",
+            "aku berharap ga ada orang ketiga",
+            "pertahanin sampai dateng waktu yang tepat ya",
+            "sejutaa cinta, sayang, tulusku buat kamu octavia sekar vanima",
+            "love u sayangg 🤍",
+            "by - danu"
+        ];
+
+        let textIndex = 0;
+        let charIndex = 0;
+        const textElement = document.getElementById("typing-text");
+
+        function startEverything() {
+            const song = document.getElementById("mySong");
+            
+            // Perintah putar musik
+            song.play();
+
+            document.getElementById("welcome-screen").style.opacity = "0";
+            
+            setTimeout(() => {
+                document.getElementById("welcome-screen").style.display = "none";
+                document.getElementById("flower-container").style.display = "flex";
+                document.getElementById("text-overlay").style.display = "block";
+                type(); 
+            }, 1000);
+        }
+
+        function type() {
+            if (charIndex < texts[textIndex].length) {
+                textElement.innerHTML += texts[textIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 100);
+            } else {
+                setTimeout(erase, 2000);
+            }
+        }
+
+        function erase() {
+            if (textIndex < texts.length - 1) {
+                textElement.style.opacity = 0;
+                setTimeout(() => {
+                    textElement.innerHTML = "";
+                    textElement.style.opacity = 1;
+                    charIndex = 0;
+                    textIndex++;
+                    type();
+                }, 500);
+            }
+        }
+    </script>
+</body>
+          </html>
